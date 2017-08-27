@@ -19,10 +19,8 @@ library(statsr)
 
 ### Load data
 
-#self-reminder do not need to reload data for every knit 
-
 ```{r load-data}
-#load("movies.Rdata")
+load("movies.Rdata")
 ```
 
 
@@ -36,6 +34,8 @@ library(statsr)
 
 ## Part 2: Research question
 
+My research question concerns understanding how movie rating scores are related to movie awards, movie length, and title type (feature vs. documentary). I am interested in whether critics and audiences share similar regression models for predicting rating scores, respectively. 
+
 
 
 * * *
@@ -44,6 +44,9 @@ library(statsr)
 
 
 ```{r}
+movies2 <- filter(movies, title_type == "Documentary" | title_type == "Feature Film")
+
+
 
 ```
 
@@ -53,6 +56,13 @@ library(statsr)
 ## Part 4: Modeling
 
 ```{r}
+summary(lm(movies2, formula = audience_score ~ best_pic_nom + best_pic_win +
+             best_actress_win + best_actor_win + best_dir_win +
+             title_type + runtime))
+
+summary(lm(movies2, formula = critics_score ~ best_pic_nom + best_pic_win +
+             best_actress_win + best_actor_win + best_dir_win +
+             title_type + runtime))
 
 ```
 
